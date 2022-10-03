@@ -1,5 +1,7 @@
+// where Test for main Index file is written
 import app from '../../app';
 import supertest from 'supertest';
+import myFunc from '../index';
 
 describe('Testing the home page endpoint', function() {
 
@@ -8,6 +10,9 @@ describe('Testing the home page endpoint', function() {
     await supertest(app)
       .get('/')
       .expect(200);
+  });
+  it('expect myFunc(5) to equal 25', () => {
+    expect(myFunc(5)).toEqual(25);
   });
 
 });

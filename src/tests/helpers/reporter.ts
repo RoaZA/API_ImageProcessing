@@ -1,3 +1,4 @@
+// spec Reporter is going to look for the configuration
 import {DisplayProcessor, SpecReporter, StacktraceOption} from 'jasmine-spec-reporter';
 import SuiteInfo = jasmine.SuiteInfo;
 
