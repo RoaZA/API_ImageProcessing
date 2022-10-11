@@ -1,5 +1,5 @@
 import app from '../app';
-import routes from './routes/index' //****routes**** */
+import routes from './routes/index'; //****routes**** */
 const myFunc = (num: number): number => {
   return num * num;
 };

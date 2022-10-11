@@ -1,12 +1,11 @@
-
 import express from 'express';
-import images from './api/images'
+import images from './api/images';
 //import fs from 'fs';
 //import path from 'path';
 const routes = express.Router();
 
 routes.get('/', (req, res) => {
-    res.send('Main page');
+  res.send('Main page');
 });
 
 routes.use('/images?',images);
