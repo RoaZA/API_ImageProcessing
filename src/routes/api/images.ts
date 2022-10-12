@@ -21,7 +21,7 @@ images.get('/', (req, res) => {
   imageHeight = parseInt(req.query.height as string);
   let TempImage = `${imageFilename}-${imageWidth}-${imageHeight}`;
   //filename=SDAIACER&width=900&height=1100
-  //http://localhost:3000/api/images?filename=SDAIACER&width=900&height=800
+  //http://localhost:3000/api/images?filename=SDAIACER&width=900&height=660
 
   // send TempImage to searchInFile func
   // if responce not null or 0

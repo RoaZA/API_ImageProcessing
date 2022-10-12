@@ -6,9 +6,10 @@ const routes = express.Router();
 
 routes.get('/', (req, res) => {
   res.send('Main page');
+  // res.send('<img src="http://localhost:3000/images/SDAIACER.jpg">');
 });
 
-routes.use('/images?',images);
+routes.use('/images?', images);
 
 // routes.get('/', (req, res) => {
 //     res.render('<img src="http://localhost:3000/images/DeepLearninSpe2.jpg">');

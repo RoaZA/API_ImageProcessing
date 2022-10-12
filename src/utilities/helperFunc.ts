@@ -6,14 +6,19 @@ const sharp = require('sharp');
 async function resizeApiImage(fileName: string, width: number, height: number) {
   try {
     console.log('inside resize');
-    await sharp(path.join(process.cwd(),`src/images/${fileName}.jpg`))
+    await sharp(path.join(process.cwd(), `src/images/${fileName}.jpg`))
       .resize({
         width: width,
-        height: height
+        height: height,
       })
-      .toFile(path.join(process.cwd(),`src/images/${fileName}-${width}-${height}.jpg`));
+      .toFile(
+        path.join(
+          process.cwd(),
+          `src/images/thumbnail/${fileName}-${width}-${height}.jpg`
+        )
+      );
   } catch (error) {
     console.log(error);
   }
 }
-export default resizeApiImage ;
+export default resizeApiImage;
