@@ -3,7 +3,7 @@ import path from 'path';
 import resizeApiImage from '../utilities/helperFunc';
 
 // for Catching
-async function writeData(imageName: string) {
+async function writeData(imageName: string){
   console.log('inside writeData');
   let flag = false;
   let found = false;

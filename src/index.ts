@@ -1,4 +1,5 @@
 import app from '../app';
+import images from './routes/api/images';
 import routes from './routes/index'; //****routes**** */
 const myFunc = (num: number): number => {
   return num * num;
@@ -6,6 +7,8 @@ const myFunc = (num: number): number => {
 
 export default myFunc;
 app.use('/api', routes); //****routes**** */
+// app.use('/api/images', images);
+
 const port = 3000;
 const start = async () => {
   app.listen(port, () =>

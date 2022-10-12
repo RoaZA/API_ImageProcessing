@@ -2,7 +2,7 @@ import express from 'express';
 //import resizeApiImage from '../../utilities/helperFunc';
 import writeData from '../../utilities/FileSystemFunc';
 //import fs from 'fs';
-//import path from 'path';
+import path from 'path';
 const images = express.Router();
 // get image properites from the query parameters
 // formate it to filename_width_height string formate
@@ -13,7 +13,7 @@ const images = express.Router();
 let imageFilename: string;
 let imageWidth: number;
 let imageHeight: number;
-images.get('/', (req, res) => {
+images.get('/', async (req, res) => {
   // res.send('Images routes');
   //imageFilename = req.query.filename;
   imageFilename = req.query.filename as string;
@@ -27,8 +27,10 @@ images.get('/', (req, res) => {
   // if responce not null or 0
   // send imageFilename , imageWidth and imageHeight to resize function
   //resizeApiImage(imageFilename,imageWidth,imageHeight);
-  writeData(TempImage);
-  console.log(TempImage);
+  await writeData(TempImage);
+  //console.log(TempImage);
+  res.sendFile(path.join(process.cwd(), `src/images/thumbnail/${TempImage}.jpg`));
+
 });
 
 export default images;
