@@ -1,13 +1,8 @@
 import app from '../app';
-import images from './routes/api/images';
-import routes from './routes/index'; //****routes**** */
-const myFunc = (num: number): number => {
-  return num * num;
-};
+//import images from './routes/api/images';
+// import routes from './routes/index';
 
-export default myFunc;
-app.use('/api', routes); //****routes**** */
-// app.use('/api/images', images);
+// app.use('/api', routes);
 
 const port = 3000;
 const start = async () => {

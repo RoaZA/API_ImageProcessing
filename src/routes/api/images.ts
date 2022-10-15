@@ -1,36 +1,55 @@
-import express from 'express';
-//import resizeApiImage from '../../utilities/helperFunc';
+import express, { Request, Response } from 'express';
+//import writeData, { checkThumbnailImage } from '../../utilities/FileSystemFunc';
 import writeData from '../../utilities/FileSystemFunc';
-//import fs from 'fs';
+const fs = require('fs').promises;
 import path from 'path';
+// *** Function Description ***
+
+/*
+Get image properites from the query parameters
+formate it to filename-width-height as a string formate
+search in text file if the image has been already resized before or not
+if yes, show the image
+if no, resize the image using sharp and then store it in thumbnail folder
+for the first time we should create a thumbnail folder if not exist
+ */
 const images = express.Router();
-// get image properites from the query parameters
-// formate it to filename_width_height string formate
-// search in text file if the image has been already resised before or not
-// if yes, show the image
-// if no, resize the image using sharp and then store it in thempnail folder
-// for the first time we should create the folder if not exist
+
 let imageFilename: string;
 let imageWidth: number;
 let imageHeight: number;
-images.get('/', async (req, res) => {
-  // res.send('Images routes');
-  //imageFilename = req.query.filename;
+
+images.get('/', async (req: Request, res: Response): Promise<void> => {
   imageFilename = req.query.filename as string;
   imageWidth = parseInt(req.query.width as string);
   imageHeight = parseInt(req.query.height as string);
   let TempImage = `${imageFilename}-${imageWidth}-${imageHeight}`;
-  //filename=SDAIACER&width=900&height=1100
-  //http://localhost:3000/api/images?filename=SDAIACER&width=900&height=660
-
-  // send TempImage to searchInFile func
-  // if responce not null or 0
-  // send imageFilename , imageWidth and imageHeight to resize function
-  //resizeApiImage(imageFilename,imageWidth,imageHeight);
-  await writeData(TempImage);
-  //console.log(TempImage);
-  res.sendFile(path.join(process.cwd(), `src/images/thumbnail/${TempImage}.jpg`));
-
+  //http://localhost:3000/api/images?filename=Lamp&width=900&height=660
+  //if(imageFilename == undefined && imageWidth == NaN && imageHeight == NaN)
+  if(TempImage !== 'undefined-NaN-NaN'){
+    try{
+      await writeData(TempImage,imageFilename);
+    }catch(err){
+      res.send('Something went wrong while processing the image!');
+      return console.error(err);
+    }
+    // try{
+    //   await checkThumbnailImage(TempImage);
+    // }catch(err){
+    //   res.send('Something went wrong while showing the image!');
+    //   return console.error(err);
+    // }
+    try{
+      await fs.access(path.join(process.cwd(), `src/images/thumbnail/${TempImage}.jpg`));
+      res.sendFile(path.join(process.cwd(), `src/images/thumbnail/${TempImage}.jpg`));
+    }catch(err){
+      res.send('Image with provided thumbnail is not found');
+      return console.error(err);
+    }
+  }
+  else{
+    res.send('Please make sure that the image name or width and height are provided in the URL');
+  }
 });
 
 export default images;

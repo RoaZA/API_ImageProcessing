@@ -1,7 +1,10 @@
-//import sharp from 'sharp';
-
 import path from 'path';
 const sharp = require('sharp');
+// *** Function Description ***
+/*
+resizie an image using sharp by passing its properyties (width,height)
+then write it to thumbnail folder if the process goes well
+ */
 
 async function resizeApiImage(fileName: string, width: number, height: number) {
   try {
@@ -18,6 +21,8 @@ async function resizeApiImage(fileName: string, width: number, height: number) {
         )
       );
   } catch (error) {
+    // if image is not exist in the image folder or somthing went wrong while resising it
+    console.log('The provided width or height is not valid!');
     console.log(error);
   }
 }
