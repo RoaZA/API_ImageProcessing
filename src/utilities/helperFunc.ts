@@ -9,15 +9,15 @@ then write it to thumbnail folder if the process goes well
 async function resizeApiImage(fileName: string, width: number, height: number) {
   try {
     console.log('inside resize');
-    await sharp(path.join(process.cwd(), `src/images/${fileName}.jpg`))
+    await sharp(path.join(__dirname, `../images/${fileName}.jpg`))
       .resize({
         width: width,
         height: height,
       })
       .toFile(
         path.join(
-          process.cwd(),
-          `src/images/thumbnail/${fileName}-${width}-${height}.jpg`
+          __dirname,
+          `../images/thumbnail/${fileName}-${width}-${height}.jpg`
         )
       );
   } catch (error) {

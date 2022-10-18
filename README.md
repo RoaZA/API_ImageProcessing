@@ -5,3 +5,4 @@ This project is an API image processing specifically for resizing an image its p
 1. To test the project endpoints and functionalities, you should run `npm run test` this will run build and then run test.
 2. To start the server, you should run `npm run start` and then click on `http://localhost:3000/api` to start resizing some images.
 3. To check Lint and Prettier, you should run `npm run lint` then `npm run prettier`.
+4. To check the endpoints, you can check `/api`and `/api/images`.

@@ -20,6 +20,7 @@ let imageWidth: number;
 let imageHeight: number;
 
 images.get('/', async (req: Request, res: Response): Promise<void> => {
+
   imageFilename = req.query.filename as string;
   imageWidth = parseInt(req.query.width as string);
   imageHeight = parseInt(req.query.height as string);
@@ -40,8 +41,8 @@ images.get('/', async (req: Request, res: Response): Promise<void> => {
     //   return console.error(err);
     // }
     try{
-      await fs.access(path.join(process.cwd(), `src/images/thumbnail/${TempImage}.jpg`));
-      res.sendFile(path.join(process.cwd(), `src/images/thumbnail/${TempImage}.jpg`));
+      await fs.access(path.join(__dirname, `../../images/thumbnail/${TempImage}.jpg`));
+      res.sendFile(path.join(__dirname, `../../images/thumbnail/${TempImage}.jpg`));
     }catch(err){
       res.send('Image with provided thumbnail is not found');
       return console.error(err);

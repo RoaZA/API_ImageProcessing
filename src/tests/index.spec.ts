@@ -1,4 +1,3 @@
-// where Test for main Index file is written
 import app from '../../app';
 import supertest from 'supertest';
 const fs = require('fs').promises;
