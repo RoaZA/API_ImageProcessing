@@ -47,8 +47,8 @@ images.get('/', async (req: Request, res: Response): Promise<void> => {
     //   return console.error(err);
     // }
     try{
-      await fs.access(path.join(__dirname, `../../images/thumbnail/${TempImage}.jpg`));
-      res.sendFile(path.join(__dirname, `../../images/thumbnail/${TempImage}.jpg`));
+      await fs.access(path.join(process.cwd(), `public/images/thumbnail/${TempImage}.jpg`));
+      res.sendFile(path.join(process.cwd(), `public/images/thumbnail/${TempImage}.jpg`));
     }catch(err){
       res.send('Image with provided thumbnail is not found');
       return console.error(err);

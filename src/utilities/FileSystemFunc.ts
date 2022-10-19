@@ -15,7 +15,7 @@ async function writeData(imageName: string,imgFilename: string){
   console.log('inside writeData');
 
   try{
-    await fs.access(path.join(__dirname, `../images/${imgFilename}.jpg`));
+    await fs.access(path.join(process.cwd(), `public/images/${imgFilename}.jpg`));
   }catch(err){
     console.log('Image with provided name is not found');
     return console.error(err);
@@ -23,7 +23,7 @@ async function writeData(imageName: string,imgFilename: string){
   let flag = false;
   let found = false;
   try {
-    await fs.access(path.join(__dirname, '/imageNames.txt'));
+    await fs.access(path.join(process.cwd(), 'public/imageNames.txt'));
     found = true;
   } catch {
     found = false;
@@ -33,7 +33,7 @@ async function writeData(imageName: string,imgFilename: string){
     //file exists
     console.log('inside found');
     const imageNameFile1 = await fs.readFile(
-      path.join(__dirname, '/imageNames.txt'),
+      path.join(process.cwd(), 'public/imageNames.txt'),
       'utf-8'
     );
     console.log(imageNameFile1);
@@ -50,14 +50,14 @@ async function writeData(imageName: string,imgFilename: string){
 
   else{
     console.log('Making new dir');
-    fs.mkdir(path.join(__dirname, '../images/thumbnail'), (err: Error) => {
+    fs.mkdir(path.join(process.cwd(), 'public/images/thumbnail'), (err: Error) => {
       if (err){
         console.log('Directory already created!');
         return console.error(err);
       }
       console.log('Directory is created successfully!');
     });
-    fs.writeFile(path.join(__dirname, '/imageNames.txt'), '', (err:Error) => {
+    fs.writeFile(path.join(process.cwd(), 'public/imageNames.txt'), '', (err:Error) => {
       if (err)
         return console.error(err);
       console.log('File is created successfully.');
@@ -69,7 +69,7 @@ async function writeData(imageName: string,imgFilename: string){
     await sendToResize(imageName);
 
     // we should wait until the image got resized the we should append the name of the image to our text file
-    await fs.appendFile(path.join(__dirname, '/imageNames.txt'),`${imageName}.jpg;`, (err: Error) => {
+    await fs.appendFile(path.join(process.cwd(), 'public/imageNames.txt'),`${imageName}.jpg;`, (err: Error) => {
       if (err) throw err;
       console.log('The provided image is appended to the file!');
     });
@@ -90,7 +90,7 @@ async function sendToResize(imageName: string) {
 /*
 export async function checkThumbnailImage(TempImage: string){
   try{
-    await fs.access(path.join(__dirname, `../images/thumbnail/${TempImage}.jpg`));
+    await fs.access(path.join(process.cwd(), `public/images/thumbnail/${TempImage}.jpg`));
   }catch(err){
     console.log('Image with provided thumbnail is not found');
     return console.error(err);
