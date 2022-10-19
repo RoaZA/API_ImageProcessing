@@ -9,7 +9,7 @@ const app = express();
 // app.get('*', (req: Request, res: Response): void => {
 //     res.status(404).send('Not Found!');
 //   });
-app.get('/',  (req: Request, res: Response): void =>{
+app.get('/', (req: Request, res: Response): void => {
   res.send('Welcome to the home page!');
 });
 app.use('/api', routes);

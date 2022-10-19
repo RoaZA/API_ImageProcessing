@@ -3,6 +3,7 @@ import express, { Request, Response } from 'express';
 import writeData from '../../utilities/FileSystemFunc';
 const fs = require('fs').promises;
 import path from 'path';
+
 // *** Function Description ***
 
 /*
@@ -24,10 +25,15 @@ images.get('/', async (req: Request, res: Response): Promise<void> => {
   imageFilename = req.query.filename as string;
   imageWidth = parseInt(req.query.width as string);
   imageHeight = parseInt(req.query.height as string);
+
   let TempImage = `${imageFilename}-${imageWidth}-${imageHeight}`;
-  //http://localhost:3000/api/images?filename=Lamp&width=900&height=660
+  //http://localhost:3000/api/images?filename=Lamp&width=abc&height=660
   //if(imageFilename == undefined && imageWidth == NaN && imageHeight == NaN)
   if(TempImage !== 'undefined-NaN-NaN'){
+    if(isNaN(imageWidth) ||isNaN(imageHeight) ||Math.sign(imageWidth)===-1 || Math.sign(imageHeight)===-1 ) {
+      res.send('Please make sure that the image width and height are valid numbers and positive value');
+      return console.error('Not A Valid Value');
+    }
     try{
       await writeData(TempImage,imageFilename);
     }catch(err){
